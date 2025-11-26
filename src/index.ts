@@ -1,9 +1,8 @@
 /**
- * Entry point registering the Table Of Contents module with Divi 5 and attaching front-end runtime.
+ * Shared exports for the Divi TOC module.
+ * The builder entry registers this definition with Divi 5.
  */
-import { registerModule } from './divi-module-shim';
 import TableOfContentsModule from './components/table-of-contents-module';
-import './components/table-of-contents-module/style.scss';
-import './frontend';
 
-registerModule(TableOfContentsModule.metadata.slug, TableOfContentsModule);
+export default TableOfContentsModule;
+export { TableOfContentsModule };

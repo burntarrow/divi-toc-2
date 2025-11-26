@@ -17,4 +17,9 @@ npm run build
 npm test
 ```
 
+Build outputs:
+- `build/divi-toc-builder.js` – Divi 5 builder registration bundle.
+- `build/divi-toc-frontend.js` – front-end/runtime behaviors.
+- `assets/css/divi-toc.css` – extracted styles for both builder preview and front-end.
+
 > Note: if your environment blocks scoped package downloads, configure npm with an accessible registry before running `npm install`.
