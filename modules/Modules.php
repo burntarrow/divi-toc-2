@@ -1,21 +1,23 @@
 <?php
+/**
+ * Registers all Divi TOC modules (Divi 5).
+ */
+
 namespace Divi_toc\Modules;
 
-use Divi_toc\Modules\TableOfContentsModule\TableOfContentsModule;
+defined( 'ABSPATH' ) || exit;
 
-/**
- * Registers Divi 5 modules for this extension.
- */
 class Modules {
-    public static function register() {
-        // Ensure the module class is loaded even when Composer autoloading
-        // is unavailable (for example when the plugin zip is installed
-        // without running composer install). This mirrors the approach in
-        // the Divi 5 example modules so the class exists before registering.
-        if ( ! class_exists( TableOfContentsModule::class ) ) {
-            require_once plugin_dir_path( __FILE__ ) . 'TableOfContentsModule/TableOfContentsModule.php';
-        }
 
-        TableOfContentsModule::register();
-    }
+	/**
+	 * Register all modules for this extension.
+	 * Called from divi-toc.php after plugins/theme are loaded.
+	 */
+	public static function register() {
+		// Load the TableOfContents module PHP class.
+		require_once __DIR__ . '/TableOfContentsModule/TableOfContentsModule.php';
+
+		// At this point Divi 5’s JS side (builder.tsx/frontend.ts) handles
+		// the actual module rendering & registration inside the builder.
+	}
 }
