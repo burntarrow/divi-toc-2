@@ -14,15 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-/**
- * Base plugin constants.
- */
 define( 'DIVI_TOC_PLUGIN_FILE', __FILE__ );
 define( 'DIVI_TOC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DIVI_TOC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**
- * Load translations.
+ * Load plugin text domain.
  */
 add_action( 'plugins_loaded', function () {
     load_plugin_textdomain(
@@ -33,9 +30,22 @@ add_action( 'plugins_loaded', function () {
 } );
 
 /**
+ * Load the Modules class directly (no Composer required).
+ */
+require_once DIVI_TOC_PLUGIN_DIR . 'modules/Modules.php';
+
+/**
+ * Register Divi 5 modules on init (PHP side).
+ */
+add_action( 'init', function () {
+    if ( class_exists( '\Divi_toc\Modules\Modules' ) ) {
+        \Divi_toc\Modules\Modules::register();
+    }
+} );
+
+/**
  * Register this plugin as a Divi 5 Extension.
- *
- * This is what tells Divi 5 to load build/index.js and your module.json files.
+ * Divi 5 will read divi-toc-extension.php and load our JS + CSS.
  */
 add_filter( 'divi.modules.extensions', function ( $extensions ) {
     $extensions['divi-toc'] = require __DIR__ . '/divi-toc-extension.php';
@@ -43,38 +53,20 @@ add_filter( 'divi.modules.extensions', function ( $extensions ) {
 } );
 
 /**
- * Load the PHP modules loader.
- */
-require_once DIVI_TOC_PLUGIN_DIR . 'modules/Modules.php';
-
-/**
- * Register PHP-side modules after WordPress init.
- * (Divi 5 JS side is handled via the extension + build/index.js.)
- */
-add_action( 'init', function () {
-    if ( class_exists( '\Divi_toc\Modules\Modules' ) ) {
-        \Divi_toc\Modules\Modules::register();
-    }
-}, 20 );
-
-/**
- * Enqueue FRONT-END styles.
+ * Front-end assets (for smooth scroll behavior, etc.).
+ * This is separate from the builder JS that Divi enqueues via the extension.
  */
 add_action( 'wp_enqueue_scripts', function () {
-    wp_enqueue_style(
-        'divi-toc',
-        DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-builder.css',
+    wp_enqueue_script(
+        'divi-toc-frontend',
+        DIVI_TOC_PLUGIN_URL . 'build/divi-toc-frontend.js',
         [],
-        '1.0.0'
+        '1.0.0',
+        true
     );
-} );
 
-/**
- * Optionally enqueue the same CSS in the editor as well.
- */
-add_action( 'enqueue_block_editor_assets', function () {
     wp_enqueue_style(
-        'divi-toc',
+        'divi-toc-frontend',
         DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-builder.css',
         [],
         '1.0.0'
