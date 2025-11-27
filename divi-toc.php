@@ -59,14 +59,11 @@ add_action( 'init', function () {
 
 /**
  * Enqueue FRONT-END styles.
- *
- * Note: Divi 5 will load your JS for the module via the extension build.
- * We only need to enqueue the shared CSS file here.
  */
 add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'divi-toc',
-        DIVI_TOC_PLUGIN_URL . 'assets/css/style.css',
+        DIVI_TOC_PLUGIN_URL . 'assets/css/index.css',
         [],
         '1.0.0'
     );
@@ -74,13 +71,13 @@ add_action( 'wp_enqueue_scripts', function () {
 
 /**
  * Optionally enqueue the same CSS in the editor as well.
- * (No JS here – Divi 5 handles builder JS itself.)
  */
 add_action( 'enqueue_block_editor_assets', function () {
     wp_enqueue_style(
         'divi-toc',
-        DIVI_TOC_PLUGIN_URL . 'assets/css/style.css',
+        DIVI_TOC_PLUGIN_URL . 'assets/css/index.css',
         [],
         '1.0.0'
     );
 } );
+
