@@ -1,55 +1,63 @@
 <?php
 /**
- * Divi TOC – Divi 5 Extension descriptor
+ * Divi TOC – Divi 5 Extension Definition
  *
- * This file is required by the `divi.modules.extensions` filter in divi-toc.php
- * and tells Divi 5 which assets and modules this extension provides.
+ * This file is required by the `divi.modules.extensions` filter in divi-toc.php.
+ * It tells Divi 5 where to find the JS/CSS assets and how to map the PHP
+ * module class for front-end rendering.
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
-
 return [
-    // This should be unique across extensions.
-    'name'      => 'Divi TOC',
-    'namespace' => 'Divi_toc',
+	// Basic extension metadata.
+	'name'        => 'Divi TOC',
+	'slug'        => 'divi-toc',
+	'version'     => '1.0.0',
+	'description' => 'A Divi 5 module that generates a table of contents from page/post headings.',
+	'author'      => 'Divi5 Plugins',
+	'authorUrl'   => 'https://divi5-plugins.com',
+	'textDomain'  => 'divi-toc',
 
-    /**
-     * Scripts loaded by Divi 5.
-     *
-     * IMPORTANT: `divi-toc-builder` MUST point to the JS bundle that calls
-     * `registerModule(...)` for your TableOfContents module.
-     */
-    'scripts'   => [
-        'divi-toc-builder'  => [
-            'src'       => plugins_url( 'build/divi-toc-builder.js', __FILE__ ),
-            'in_footer' => true,
-            // Divi 5 will enqueue its own runtime; we keep deps light here.
-            'deps'      => [ 'react', 'react-dom' ],
-        ],
-        'divi-toc-frontend' => [
-            'src'       => plugins_url( 'build/divi-toc-frontend.js', __FILE__ ),
-            'in_footer' => true,
-            'deps'      => [],
-        ],
-    ],
+	/**
+	 * Assets: relative to the plugin root.
+	 *
+	 * Divi will load:
+	 * - `scripts.builder` in the Visual Builder
+	 * - `scripts.frontend` on the front end
+	 * - matching `styles.*` in those contexts
+	 */
+	'assets'      => [
+		'scripts' => [
+			// Built from src/builder.tsx
+			'builder'  => 'build/divi-toc-builder.js',
 
-    /**
-     * Styles for builder + frontend.
-     * We’re using the CSS file produced by webpack (MiniCssExtractPlugin).
-     */
-    'styles'    => [
-        'divi-toc-builder' => [
-            'src' => plugins_url( 'assets/css/divi-toc-builder.css', __FILE__ ),
-        ],
-    ],
+			// Built from src/frontend.ts
+			'frontend' => 'build/divi-toc-frontend.js',
+		],
+		'styles'  => [
+			// Single shared stylesheet for now.
+			'builder'  => 'assets/css/divi-toc-builder.css',
+			'frontend' => 'assets/css/divi-toc-builder.css',
+		],
+	],
 
-    /**
-     * PHP module classes (for server-side rendering, custom_css, etc.).
-     * Divi TOC currently has a single module.
-     */
-    'modules'   => [
-        'Divi_toc\\Modules\\TableOfContentsModule\\TableOfContentsModule',
-    ],
+	/**
+	 * Modules mapping.
+	 *
+	 * Key should be a stable identifier; `slug` should match module.json.
+	 */
+	'modules'     => [
+		'TableOfContentsModule' => [
+			// PHP class responsible for server-side rendering.
+			'phpClass' => '\Divi_toc\Modules\TableOfContentsModule\TableOfContentsModule',
+
+			// Should match src/components/table-of-contents-module/module.json -> "slug".
+			'slug'     => 'divi_toc',
+
+			// Human label used in the builder.
+			'name'     => 'Divi TOC',
+
+			// Optional: helps Divi group the module in the builder UI.
+			'category' => 'layout',
+		],
+	],
 ];
