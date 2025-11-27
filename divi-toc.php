@@ -63,7 +63,7 @@ add_action( 'init', function () {
 add_action( 'wp_enqueue_scripts', function () {
     wp_enqueue_style(
         'divi-toc',
-        DIVI_TOC_PLUGIN_URL . 'assets/css/index.css',
+        DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-builder.css',
         [],
         '1.0.0'
     );
@@ -75,9 +75,8 @@ add_action( 'wp_enqueue_scripts', function () {
 add_action( 'enqueue_block_editor_assets', function () {
     wp_enqueue_style(
         'divi-toc',
-        DIVI_TOC_PLUGIN_URL . 'assets/css/index.css',
+        DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-builder.css',
         [],
         '1.0.0'
     );
 } );
-
