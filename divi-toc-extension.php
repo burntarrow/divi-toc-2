@@ -8,58 +8,59 @@
  */
 
 return [
-	// Basic extension metadata.
-	'name'        => 'Divi TOC',
-	'slug'        => 'divi-toc',
-	'version'     => '1.0.2',
-	'description' => 'A Divi 5 module that generates a table of contents from page/post headings.',
-	'author'      => 'Divi5 Plugins',
-	'authorUrl'   => 'https://divi5-plugins.com',
-	'textDomain'  => 'divi-toc',
+    // Basic extension metadata.
+    'name'        => 'Divi TOC',
+    'slug'        => 'divi-toc',
+    'version'     => '1.0.2',
+    'description' => 'A Divi 5 module that generates a table of contents from page/post headings.',
+    'author'      => 'Divi5 Plugins',
+    'authorUrl'   => 'https://divi5-plugins.com',
+    'textDomain'  => 'divi-toc',
 
-	/**
-	 * Assets: paths are relative to the plugin root.
-	 *
-	 * Divi will load:
-	 * - `scripts.builder` in the Divi 5 Visual Builder
-	 * - `scripts.frontend` on the front end
-	 * - matching `styles.*` in those contexts
-	 */
-	'assets'      => [
-		'scripts' => [
-			// Built from src/builder.tsx
-			'builder'  => 'build/divi-toc-builder.js',
+    /**
+     * Top-level assets that Divi 5 should load for the extension itself.
+     * The `index` script is the compiled version of src/index.ts and mirrors
+     * the structure used in the official Divi 5 example modules.
+     */
+    'assets'      => [
+        'scripts' => [
+            'index' => 'build/index.js',
+        ],
+        'styles'  => [
+            'index' => 'assets/css/index.css',
+        ],
+    ],
 
-			// Built from src/frontend.ts
-			'frontend' => 'build/divi-toc-frontend.js',
-		],
-		'styles'  => [
-			// Single shared stylesheet for now (same file for both contexts).
-			'builder'  => 'assets/css/divi-toc-builder.css',
-			'frontend' => 'assets/css/divi-toc-builder.css',
-		],
-	],
+    /**
+     * Modules mapping.
+     *
+     * Key should be a stable identifier; `slug` should match module.json.
+     */
+    'modules'     => [
+        'TableOfContentsModule' => [
+            // PHP class responsible for server-side rendering.
+            'phpClass' => '\\Divi_toc\\Modules\\TableOfContentsModule\\TableOfContentsModule',
 
-	/**
-	 * Modules mapping.
-	 *
-	 * The key ("TableOfContentsModule") is a stable identifier inside this extension.
-	 * - `phpClass` must point to your PHP render class.
-	 * - `slug` must match src/components/table-of-contents-module/module.json -> "slug".
-	 */
-	'modules'     => [
-		'TableOfContentsModule' => [
-			// PHP class responsible for server-side rendering.
-			'phpClass' => '\Divi_toc\Modules\TableOfContentsModule\TableOfContentsModule',
+            // Should match src/components/table-of-contents-module/module.json -> "slug".
+            'slug'     => 'divi_toc',
 
-			// Must match your module.json slug.
-			'slug'     => 'divi_toc',
+            // Human label used in the builder.
+            'name'     => 'Divi TOC',
 
-			// Human-readable label used in the builder.
-			'name'     => 'Divi TOC',
+            // Optional: helps Divi group the module in the builder UI.
+            'category' => 'layout',
 
-			// Helps Divi group the module; keep this in sync with your JS metadata/category.
-			'category' => 'layout',
-		],
-	],
+            // Per-module asset map mirrors the Divi 5 example extension.
+            'assets'   => [
+                'scripts' => [
+                    'builder'  => 'build/divi-toc-builder.js',
+                    'frontend' => 'build/divi-toc-frontend.js',
+                ],
+                'styles'  => [
+                    'builder'  => 'assets/css/divi-toc-builder.css',
+                    'frontend' => 'assets/css/divi-toc-frontend.css',
+                ],
+            ],
+        ],
+    ],
 ];

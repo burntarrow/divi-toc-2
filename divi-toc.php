@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 define( 'DIVI_TOC_PLUGIN_FILE', __FILE__ );
 define( 'DIVI_TOC_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DIVI_TOC_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DIVI_TOC_VERSION', '1.0.2' );
 
 /**
  * Load plugin text domain.
@@ -61,14 +62,14 @@ add_action( 'wp_enqueue_scripts', function () {
         'divi-toc-frontend',
         DIVI_TOC_PLUGIN_URL . 'build/divi-toc-frontend.js',
         [],
-        '1.0.2',
+        DIVI_TOC_VERSION,
         true
     );
 
     wp_enqueue_style(
         'divi-toc-frontend',
-        DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-builder.css',
+        DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-frontend.css',
         [],
-        '1.0.2'
+        DIVI_TOC_VERSION
     );
 } );
