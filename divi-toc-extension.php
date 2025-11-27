@@ -11,7 +11,7 @@ return [
 	// Basic extension metadata.
 	'name'        => 'Divi TOC',
 	'slug'        => 'divi-toc',
-	'version'     => '1.0.0',
+        'version'     => '1.0.2',
 	'description' => 'A Divi 5 module that generates a table of contents from page/post headings.',
 	'author'      => 'Divi5 Plugins',
 	'authorUrl'   => 'https://divi5-plugins.com',

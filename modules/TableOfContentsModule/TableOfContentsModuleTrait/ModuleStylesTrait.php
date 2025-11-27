@@ -5,7 +5,7 @@ namespace Divi_toc\Modules\TableOfContentsModule\TableOfContentsModuleTrait;
 trait ModuleStylesTrait {
     public function enqueue_scripts() {
         $base_file = dirname( __DIR__, 2 ) . '/divi-toc.php';
-        $version   = defined( 'DIVI_TOC_VERSION' ) ? DIVI_TOC_VERSION : '1.0.0';
+        $version   = defined( 'DIVI_TOC_VERSION' ) ? DIVI_TOC_VERSION : '1.0.2';
         wp_register_script(
             'divi_toc_frontend',
             plugins_url( 'build/divi-toc-frontend.js', $base_file ),

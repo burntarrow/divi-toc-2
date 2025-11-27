@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Divi TOC
  * Description:       A Divi 5 module that generates a table of contents for page/post headings.
- * Version:           1.0.0
+ * Version:           1.0.2
  * Author:            Divi5 Plugins
  * Author URI:        https://divi5-plugins.com
  * Plugin URI:        https://divi5-plugins.com/divi-toc/
@@ -61,7 +61,7 @@ add_action( 'wp_enqueue_scripts', function () {
         'divi-toc-frontend',
         DIVI_TOC_PLUGIN_URL . 'build/divi-toc-frontend.js',
         [],
-        '1.0.0',
+        '1.0.2',
         true
     );
 
@@ -69,6 +69,6 @@ add_action( 'wp_enqueue_scripts', function () {
         'divi-toc-frontend',
         DIVI_TOC_PLUGIN_URL . 'assets/css/divi-toc-builder.css',
         [],
-        '1.0.0'
+        '1.0.2'
     );
 } );
