@@ -1,6 +1,5 @@
 <?php
 // Load Divi 5 modules.
-require_once DIVI_TOC_PLUGIN_DIR . 'divi-5/vendor/autoload.php';
 require_once DIVI_TOC_PLUGIN_DIR . 'divi-5/server/Modules/Modules.php';
 
 /**

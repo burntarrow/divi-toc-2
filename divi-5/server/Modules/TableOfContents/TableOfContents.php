@@ -11,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );
 }
 
+require_once __DIR__ . '/TableOfContentsTraits/RenderCallbackTrait.php';
+require_once __DIR__ . '/TableOfContentsTraits/ModuleClassnamesTrait.php';
+require_once __DIR__ . '/TableOfContentsTraits/ModuleStylesTrait.php';
+require_once __DIR__ . '/TableOfContentsTraits/ModuleScriptDataTrait.php';
+
 use DiviTOC\Modules\TableOfContents\TableOfContentsTraits;
 use ET\Builder\Framework\DependencyManagement\Interfaces\DependencyInterface;
 use ET\Builder\Packages\ModuleLibrary\ModuleRegistration;

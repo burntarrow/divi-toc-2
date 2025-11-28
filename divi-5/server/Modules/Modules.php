@@ -11,6 +11,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     die( 'Direct access forbidden.' );
 }
 
+require_once __DIR__ . '/TableOfContents/TableOfContents.php';
+
 use DiviTOC\Modules\TableOfContents\TableOfContents;
 
 // Register modules with Divi 5's dependency tree.
