@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  *       }
  *   }
  */
-const DIVI_TOC_D5_MODULES_CLASS = '\\Divi_toc\\Divi5\\Server\\Modules\\Modules';
+const DIVI_TOC_D5_MODULES_CLASS = '\\Divi_toc\\divi-5\\Server\\Modules\\Modules';
 
 /**
  * Derive plugin root path/URL from this file.
